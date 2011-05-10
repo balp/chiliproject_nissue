@@ -20,7 +20,7 @@ class ChiliProject::Nissue::IssueView::SubIssuesParagraph < ChiliProject::Nissue
 
     if User.current.allowed_to?(:manage_subtasks, @issue.project)
       str << content_tag(:div,
-                  t.link_to(l(:button_add), {:controller => 'issues', :action => 'new', :project_id => @project, :issue => {:parent_issue_id => @issue}}),
+                  t.link_to(l(:button_add), {:controller => 'issues', :action => 'new', :project_id => @issue.project, :issue => {:parent_issue_id => @issue}}),
                   :class => 'contextual')
     end
 
