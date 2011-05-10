@@ -15,7 +15,6 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
 
   def render(t)
     content_tag(:div, [
-      actions.render(t),
       title.render(t),
       content_tag(:div, [
         avatar.render(t),
@@ -24,10 +23,6 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
       ].flatten, :class => @issue.css_classes  + ' details'),
       ''
     ], :class => 'issue-view')
-  end
-
-  def actions
-    @actions ||= ChiliProject::Nissue::IssueView::Actions.new(@issue)
   end
 
   def title
