@@ -1,16 +1,8 @@
 class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
   attr_reader :issue
 
-  def initialize(issue, &block)
+  def initialize(issue)
     @issue = issue
-
-    if block.present?
-      if block.arity == 1
-        block.call(self)
-      else
-        instance_eval(block)
-      end
-    end
   end
 
   def render(t)
@@ -19,9 +11,8 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
       content_tag(:div, [
         avatar.render(t),
         heading.render(t),
-        paragraphs.inject([]) { |m, o| m << o.render(t) << tag(:hr) }[0..-2]
-      ].flatten, :class => @issue.css_classes  + ' details'),
-      ''
+        *render_paragraphs(t)
+      ], :class => @issue.css_classes  + ' details')
     ], :class => 'issue-view')
   end
 
@@ -35,6 +26,10 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
 
   def heading
     @heading ||= ChiliProject::Nissue::IssueView::Heading.new(@issue)
+  end
+
+  def render_paragraphs(t)
+    paragraphs.inject([]) { |m, o| m << o.render(t) << tag(:hr) }[0..-2]
   end
 
   def paragraphs
