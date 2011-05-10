@@ -5,11 +5,11 @@ class ChiliProject::Nissue::IssueView::Title < ChiliProject::Nissue::View
     @issue = issue
   end
 
-  def render(template)
+  def render(t)
     content_tag(:h2, %Q{
       #{@issue.tracker.name}
       ##{@issue.id}
-      #{template.call_hook(:view_issues_show_identifier, :issue => @issue)}
+      #{t.call_hook(:view_issues_show_identifier, :issue => @issue)}
     })
   end
 end
