@@ -9,7 +9,7 @@ class ChiliProject::Nissue::ChangesetView < ChiliProject::Nissue::View
 
     content_tag(:div, [
       content_tag(:h3, l(:label_associated_revisions)),
-      t.render( :partial => 'history', :locals => { :issue => @issue, :journals => @journals })
+      t.render( :partial => 'issues/history', :locals => { :issue => @issue, :journals => @journals })
     ], :id => 'issue-changesets')
   end
 end

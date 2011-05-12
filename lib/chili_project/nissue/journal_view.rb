@@ -9,7 +9,7 @@ class ChiliProject::Nissue::JournalView < ChiliProject::Nissue::View
 
     content_tag(:div, [
       content_tag(:h3, l(:label_history)),
-      t.render(:partial => 'history', :locals => {:issue => @issue, :journals => @journals})
+      t.render(:partial => 'issues/history', :locals => {:issue => @issue, :journals => @journals})
     ], :id => 'history')
   end
 end

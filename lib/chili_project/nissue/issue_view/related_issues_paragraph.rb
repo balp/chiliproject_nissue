@@ -12,6 +12,6 @@ class ChiliProject::Nissue::IssueView::RelatedIssuesParagraph < ChiliProject::Ni
   def render(t)
     return unless visible?
 
-    content_tag(:div, t.render(:partial => 'relations'), :id => 'relations')
+    content_tag(:div, t.render(:partial => 'issues/relations'), :id => 'relations')
   end
 end
