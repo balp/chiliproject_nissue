@@ -16,20 +16,29 @@ class ChiliProject::Nissue::IssueView::SubIssuesParagraph < ChiliProject::Nissue
   def render(t)
     return unless visible?
 
-    str = StringIO.new
+    content_tag(:div, [
+      render_actions(t),
+      render_label(t),
+      render_descendants(t)
+    ], :id => 'issue_tree')
+  end
 
+  def render_actions(t)
     if User.current.allowed_to?(:manage_subtasks, @issue.project)
-      str << content_tag(:div,
-                  t.link_to(l(:button_add), {:controller => 'issues', :action => 'new', :project_id => @issue.project, :issue => {:parent_issue_id => @issue}}),
+      content_tag(:div,
+                  t.link_to(l(:button_add), {:controller => 'issues',
+                                             :action => 'new',
+                                             :project_id => @issue.project,
+                                             :issue => {:parent_issue_id => @issue}}),
                   :class => 'contextual')
     end
+  end
 
-    str << content_tag(:p, content_tag(:strong, label))
+  def render_label(t)
+    content_tag(:p, content_tag(:strong, label))
+  end
 
-    str << t.render_descendants_tree(@issue) unless @issue.leaf?
-
-    str.string
-
-    content_tag(:div, str.string, :id => 'issue_tree')
+  def render_descendants(t)
+    t.render_descendants_tree(@issue) unless @issue.leaf?
   end
 end
