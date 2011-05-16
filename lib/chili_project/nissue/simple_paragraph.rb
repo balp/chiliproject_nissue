@@ -5,7 +5,7 @@ class ChiliProject::Nissue::SimpleParagraph < ChiliProject::Nissue::Paragraph
   end
 
   def label(t = nil)
-    l("field_#{@identifier}")
+    super || l("field_#{@identifier}")
   end
 
   def visible?

@@ -9,8 +9,16 @@ class ChiliProject::Nissue::IssueView::FieldsParagraph < ChiliProject::Nissue::P
     content_tag(:table, [
       render_fields(default_fields, t),
       render_fields(custom_fields, t),
-      t.call_hook(:view_issues_show_details_bottom, :issue => @issue)
+      call_hook(t)
     ], :class => 'attributes')
+  end
+
+  def call_hook(t)
+    t.call_hook(:view_issues_show_details_bottom, hook_context(t))
+  end
+
+  def hook_context(t)
+    {:issue => @issue}
   end
 
   def render_fields(fields, t)
@@ -27,7 +35,8 @@ class ChiliProject::Nissue::IssueView::FieldsParagraph < ChiliProject::Nissue::P
 
           next unless paragraph.present? && paragraph.visible?
 
-          content_tag(:th, paragraph.label + ':', :class => keys[index]) +
+          label = paragraph.label
+          content_tag(:th, label.present? ? label + ':' : '', :class => keys[index]) +
           content_tag(:td, paragraph.render(t), :class => keys[index])
         end
       end

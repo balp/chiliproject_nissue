@@ -16,6 +16,19 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
     ], :class => 'issue-view')
   end
 
+  def render_paragraphs(t)
+    paragraphs.inject([]) { |m, o| m << o.render(t) << tag(:hr) }[0..-2]
+  end
+
+  def paragraphs
+    [
+      fields_paragraph,
+      description_paragraph,
+      sub_issues_paragraph,
+      related_issues_paragraph
+    ].select(&:present?).select(&:visible?)
+  end
+
   def title
     @title ||= ChiliProject::Nissue::IssueView::Title.new(@issue)
   end
@@ -28,19 +41,19 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
     @heading ||= ChiliProject::Nissue::IssueView::Heading.new(@issue)
   end
 
-  def render_paragraphs(t)
-    paragraphs.inject([]) { |m, o| m << o.render(t) << tag(:hr) }[0..-2]
+  def fields_paragraph
+    @fields_paragraph ||= ChiliProject::Nissue::IssueView::FieldsParagraph.new(@issue)
   end
 
-  def paragraphs
-    @paragraphs ||= [
-      ChiliProject::Nissue::IssueView::FieldsParagraph.new(@issue),
-      ChiliProject::Nissue::IssueView::DescriptionParagraph.new(@issue),
-      ChiliProject::Nissue::IssueView::SubIssuesParagraph.new(@issue),
-      ChiliProject::Nissue::IssueView::RelatedIssuesParagraph.new(@issue)
-    ].select { |paragraph| paragraph.visible? }
+  def description_paragraph
+    @description_paragraph ||= ChiliProject::Nissue::IssueView::DescriptionParagraph.new(@issue)
   end
 
-  def journals
+  def sub_issues_paragraph
+    @sub_issues_paragraph ||= ChiliProject::Nissue::IssueView::SubIssuesParagraph.new(@issue)
+  end
+
+  def related_issues_paragraph
+    @related_issues_paragraph ||= ChiliProject::Nissue::IssueView::RelatedIssuesParagraph.new(@issue)
   end
 end
