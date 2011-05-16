@@ -1,8 +1,7 @@
 class ChiliProject::Nissue::View
   unloadable
 
-  include ActionView::Helpers::CaptureHelper
-  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers
   include Redmine::I18n
 
 
