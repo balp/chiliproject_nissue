@@ -2,7 +2,7 @@
 
 <%= render :partial => 'action_menu' %>
 
-<%= render :partial => 'show', :locals => {:issue => @issue, :journals => @journals, :changesets => @changesets} %>
+<%= render :partial => 'nshow', :locals => {:issue => @issue, :journals => @journals, :changesets => @changesets} %>
 
 <div style="clear: both;"></div>
 <%= render :partial => 'action_menu', :locals => {:replace_watcher => 'watcher2' } %>
