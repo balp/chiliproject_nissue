@@ -1,0 +1,6 @@
+= 1.0.0 - 2011-11-16 - Initial Release
+
+This plugin adds a internal API to ChiliProject, other plugins may build upon.
+It enables plugin code to enhance the issue form or build custom issue forms
+based on a common ground. This would not be possible with the default ERB-based
+forms, that are used throughout ChiliProject.
