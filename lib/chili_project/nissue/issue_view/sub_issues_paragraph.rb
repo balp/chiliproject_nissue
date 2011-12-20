@@ -20,7 +20,7 @@ class ChiliProject::Nissue::IssueView::SubIssuesParagraph < ChiliProject::Nissue
       render_actions(t),
       render_label(t),
       render_descendants(t)
-    ], :id => 'issue_tree')
+    ].join, :id => 'issue_tree')
   end
 
   def render_actions(t)

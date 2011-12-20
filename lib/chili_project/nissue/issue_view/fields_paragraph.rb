@@ -10,7 +10,7 @@ class ChiliProject::Nissue::IssueView::FieldsParagraph < ChiliProject::Nissue::P
       render_fields(default_fields, t),
       render_fields(custom_fields, t),
       call_hook(t)
-    ], :class => 'attributes')
+    ].join, :class => 'attributes')
   end
 
   def call_hook(t)
@@ -38,7 +38,7 @@ class ChiliProject::Nissue::IssueView::FieldsParagraph < ChiliProject::Nissue::P
           label = paragraph.label
           content_tag(:th, label.present? ? label + ':' : '', :class => keys[index]) +
           content_tag(:td, paragraph.render(t), :class => keys[index])
-        end
+        end.join
       end
     end
 

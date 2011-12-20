@@ -18,6 +18,6 @@ class ChiliProject::Nissue::IssueView::Heading < ChiliProject::Nissue::View
       t.authoring(@issue.created_on, @issue.author),
       '. ',
       @issue.created_on != @issue.updated_on ? l(:label_updated_time, t.time_tag(@issue.updated_on)) + '.' : ''
-    ], :class => 'author')
+    ].join, :class => 'author')
   end
 end

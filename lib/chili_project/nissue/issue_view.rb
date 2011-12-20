@@ -12,8 +12,8 @@ class ChiliProject::Nissue::IssueView < ChiliProject::Nissue::View
         avatar.render(t),
         heading.render(t),
         *render_paragraphs(t)
-      ], :class => @issue.css_classes  + ' details')
-    ], :class => 'issue-view')
+      ].join, :class => @issue.css_classes  + ' details')
+    ].join, :class => 'issue-view')
   end
 
   def render_paragraphs(t)
